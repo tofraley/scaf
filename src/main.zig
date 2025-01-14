@@ -42,10 +42,10 @@ fn cloneRepo(url: []const u8, path: []const u8, allocator: Allocator) !void {
 }
 
 fn reInitRepo(path: []const u8, allocator: Allocator) !void {
-    var cwd = fs.cwd();
+    var original_cwd = fs.cwd();
 
     // Create the new repository directory if it doesn't exist
-    var dest_dir = try cwd.makeOpenPath(path, .{});
+    var dest_dir = try original_cwd.makeOpenPath(path, .{});
     defer dest_dir.close();
 
     // Change to the new directory
